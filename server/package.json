@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server component",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
+    "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
+  },
+  "author": "Wechuli",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.0",
+    "mongoose": "^5.6.13",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "multer-azure-storage": "^0.2.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.0.1",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.2",
+    "supertest": "^4.0.2"
+  }
+}

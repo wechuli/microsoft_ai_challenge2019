@@ -8,6 +8,15 @@ Put your skills to the test and apply Azure AI to a new or existing project! We 
 
 Use one or more of following Azure AI services to build a new project or update an existing project: Azure Machine Learning service, Azure Cognitive Services, and Azure Search. Projects may integrate with other Azure services, open source technologies (including but not limited to frameworks, libraries, and APIs) and physical hardware of your choice.
 
-## Ideas
-- Image tagging application - too simple, but if I can't come up with something, this is my fallback
-- Enhanced image application - allow registration, allow upload of images, tag the images then read the description in a selected language of choice - ai services used - Image Classification + Language translation.
+## APP
+
+This is a simple app to tag and label images, with added translation of the description and tags of the images
+
+## Technologies
+
+- **Front-end** - React
+- **Back-end** - Node with ExpressJS
+- **AI Capabilites** - Azure Cognitize Services (Vision API, Translation API)
+- **Object Storage** - Azure Storage
+- **Hosting** - Azure Storgae for the React Application and Azure App Service for the Server Component
+- **Database** - MongoDB, free hosting 
