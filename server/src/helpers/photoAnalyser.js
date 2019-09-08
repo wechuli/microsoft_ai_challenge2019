@@ -11,7 +11,7 @@ const getPhotoDetails = async url => {
   };
 
   const result = await axios.post(
-    // Change the endpoint below to match the endpoint from the Vision API
+    // Change the endpoint below to match the endpoint from the Vision API -one you provision the keys on Azure, this will appear
     
     "https://vision-key.cognitiveservices.azure.com/vision/v1.0/analyze?visualFeatures=Categories,Tags,Description,Faces,Adult&language=en",
     body,
