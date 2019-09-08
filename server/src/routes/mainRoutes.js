@@ -14,7 +14,8 @@ router.post(
   async (req, res) => {
     try {
       const { url } = req.file;
-      await ImageRequestWorker(res, url);
+
+      await ImageRequestWorker(req, res, url);
     } catch (error) {
       res.status(500).json({ error: true, message: error });
     }
@@ -28,7 +29,8 @@ router.post(
 router.post("/urlupload", async (req, res) => {
   try {
     const { url } = req.body;
-    await ImageRequestWorker(res, url);
+
+    await ImageRequestWorker(req, res, url);
   } catch (error) {
     res.status(500).json({ error: true, message: error });
   }
@@ -38,7 +40,7 @@ router.post("/urlupload", async (req, res) => {
 router.get("/getimages/:page", async (req, res) => {
   try {
     const page = Math.abs(parseInt(req.params["page"])) || 1;
-    let skipnumber = 10;
+    let skipnumber = 5;
 
     const photos = await Image.find({})
       .limit(skipnumber)
@@ -90,20 +92,18 @@ router.delete("/single", async (req, res) => {
         .status(404)
         .json({ error: true, message: "No image with that unique string" });
     }
-    res
-      .status(200)
-      .json({
-        error: false,
-        message: "Image successfully deleted",
-        imageToDelete
-      });
+    res.status(200).json({
+      error: false,
+      message: "Image successfully deleted",
+      imageToDelete
+    });
   } catch (error) {
     res.status(500).json({ error: true, message: error });
   }
 });
 
 // Since uploading a raw image or directing the analyser to an online image is practically the same thing(in regard to how the image is ultimately analysed and translation obtained, we can make a generic function which we can use thoughout the routes, all this function needs is the url of the image and the res body as it completes the request - assuming no error occured)
-const ImageRequestWorker = async (res, url) => {
+const ImageRequestWorker = async (req, res, url) => {
   const photoAnalysisresults = await photoAnalyser(url);
   const descriptionTranslator = await translator(
     photoAnalysisresults["description"]
@@ -121,9 +121,12 @@ const ImageRequestWorker = async (res, url) => {
       text: translation.text
     });
   });
+
   const newImage = new Image({
     ...photoAnalysisresults,
     description,
+    ...req.file,
+    url,
     unique_string: uuidv4().toString()
   });
 
