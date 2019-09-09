@@ -7,7 +7,7 @@ const upload = multer({
     containerName: "photos",
     containerSecurity: "blob"
   }),
-  limits: { fileSize: 100000000 },
+  limits: { fileSize: 1000 * 1000 * 12 },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png|svg)$/)) {
       return cb(

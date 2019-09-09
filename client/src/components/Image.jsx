@@ -70,14 +70,9 @@ const Image = props => {
           </div>
 
           <div className="content m-t-lg">
-            <p>{description[0].text}</p>
+          <Description description={description} language={language}/>
           </div>
-          <input
-            className="input"
-            type="text"
-            placeholder="Enter secure string to delete"
-          ></input>
-          <button className="button is-danger m-t-md">Delete</button>
+       
         </div>
       </div>
 

@@ -20,6 +20,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -42,13 +43,12 @@ app.use((req, res) => {
   res.status(404).json({ error: true, message: "Route unavailable" });
 });
 
-
-
 // port
 const PORT = process.env.PORT || 8088;
 
-
 // initiate app to listen for connections
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.info(`The app is listening on port ${PORT}`);
 });
+
+server.timeout = 480000;

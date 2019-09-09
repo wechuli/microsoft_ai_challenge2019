@@ -1,0 +1,7 @@
+{
+    "appService.zipIgnorePattern": [
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/11b34a4b-a47e-495e-8eb1-dc7b6c283a6d/resourceGroups/azure-ai-challenge/providers/Microsoft.Web/sites/azure-ai-challenge-backend",
+    "appService.deploySubpath": ""
+}

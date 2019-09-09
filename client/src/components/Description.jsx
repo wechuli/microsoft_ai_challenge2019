@@ -1,11 +1,15 @@
 import React from "react";
 
 const Description = props => {
-  const { language,description } = props;
-  
-  const correctLan = description.find(desc=>desc.language === language);
+  const { language, description } = props;
 
-  return <p className="box">{correctLan.text}</p>;
+  const correctLan = description.find(desc => desc.language === language);
+
+  return (
+    <p className="box" >
+      {correctLan.text}
+    </p>
+  );
 };
 
 Description.defaultProps = {

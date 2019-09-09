@@ -40,8 +40,9 @@ router.post("/urlupload", async (req, res) => {
 router.get("/getimages/:page", async (req, res) => {
   try {
     const page = Math.abs(parseInt(req.params["page"])) || 1;
-    let skipnumber = 5;
+    let skipnumber = 8;
 
+    const photoCount = await Image.countDocuments();
     const photos = await Image.find({})
       .limit(skipnumber)
       .skip((page - 1) * skipnumber)
@@ -49,7 +50,8 @@ router.get("/getimages/:page", async (req, res) => {
       .exec();
     res.status(200).json({
       error: false,
-      photos
+      photos,
+      photoCount
     });
   } catch (error) {
     res.status(500).json({ error: true, message: error });
@@ -77,9 +79,11 @@ router.get("/single/:imageId", async (req, res) => {
 
 //Delete an image
 
-router.delete("/single", async (req, res) => {
+router.post("/single/delete", async (req, res) => {
   try {
+    console.log(req.body);
     const { unique_string } = req.body;
+
     if (!unique_string) {
       return res.status(401).json({
         error: true,
